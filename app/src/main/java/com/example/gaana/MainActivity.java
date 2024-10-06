@@ -13,11 +13,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     TextView noMusicTextView;
-
+    ArrayList<AudioModel> songsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,34 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         noMusicTextView = findViewById(R.id.no_songs_text);
 
-        if(checkPermission() == false){
+
+        if(!checkPermission()){
             requestPermission();
             return;
+        }
+
+        String[] projection = {
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.DURATION
+        };
+
+        String selection = MediaStore.Audio.Media.IS_MUSIC +" != 0";
+
+        Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,projection,selection,null,null);
+
+        while(cursor.moveToNext()){
+            AudioModel songData = new AudioModel(cursor.getString(1),cursor.getString(0),cursor.getString(2));
+            if(new File(songData.getPath()).exists())
+                songsList.add(songData);
+        }
+
+        if(songsList.size()==0){
+            noMusicTextView.setVisibility(View.VISIBLE);
+        }else{
+            //recyclerview
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(new MusicListAdapter(songsList,getApplicationContext()));
         }
 
     }
