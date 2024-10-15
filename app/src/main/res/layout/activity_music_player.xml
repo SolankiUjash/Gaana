@@ -94,4 +94,22 @@
 
     </RelativeLayout>
 
+
+    <Button
+        android:id="@+id/locationbtn"
+        android:layout_width="128dp"
+        android:layout_height="75dp"
+        android:layout_above="@+id/music_icon_big"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="268dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="-32dp"
+        android:color="#F50057"
+        android:text="@string/location"
+        android:textColor="@android:color/white"
+        android:textSize="15dp" />
+    <!--        android:onClick="getLocation"-->
+
+
 </RelativeLayout>
