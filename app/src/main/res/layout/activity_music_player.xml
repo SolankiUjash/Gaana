@@ -109,7 +109,6 @@
         android:text="@string/location"
         android:textColor="@android:color/white"
         android:textSize="15dp" />
-    <!--        android:onClick="getLocation"-->
 
 
 </RelativeLayout>
