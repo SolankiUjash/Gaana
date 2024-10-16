@@ -88,6 +88,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (ContextCompat.checkSelfPermission(MusicPlayerActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//                    Toast.makeText(getApplicationContext(), "Latitude - 23.0338\nLognitude - 72.5466", Toast.LENGTH_SHORT).show();
                     fetchLocation();
                 } else {
                     // Request the location permission
@@ -164,6 +165,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                             String locationInfo = "Lat: " + location.getLatitude() + ", Lng: " + location.getLongitude();
                             Log.d("Info",locationInfo+"Hello Motherfucker");
                             Toast.makeText(getApplicationContext(), locationInfo, Toast.LENGTH_LONG).show();
+
                             } else {
                                 Log.d("Else","Outside if");
 //                                currentLocationTextView.setText("Unable to get current location.");
